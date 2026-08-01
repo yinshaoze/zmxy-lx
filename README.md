@@ -1,84 +1,57 @@
-<h1 align=center>SPECULUM-4399 · 造梦西游3 离线版</h1>
+<h1 align=center>造梦西游3 离线版启动器</h1>
 
 > [!NOTE]
 > 本项目仅满足个人学习交流，不保证任何有效性。
 
 ## 简介
 
-让 4399《造梦西游3》在本地 Flash Player 中离线运行的加载器：
-
-- 无需浏览器、无需登录 4399 账号
-- 自动下载游戏资源并本地缓存，可完全离线游玩
-- 已适配：存档系统、电卷/VIP、商店消费、邀请好友（本地双人档）
-- 本地代理伪造 4399 平台接口（存档、时间同步、统计等），游戏内不出现网络报错
+一个针对《造梦西游3》精简的离线启动器：加载已初始化的游戏文件，并启动本地
+Flash Player 进行游玩，无需浏览器、无需登录。
 
 本项目基于 [constfold/Speculum-4399](https://github.com/constfold/Speculum-4399)
-开发。原项目为通用 4399 Flash 游戏离线加载器，本项目针对《造梦西游3》做了
-适配、修复与精简（含单文件发布包）。
+开发。原项目为通用 4399 Flash 游戏离线加载器，本项目精简为**仅保留运行功能**，
+并适配了《造梦西游3》的存档、电卷/VIP、商店消费、邀请好友（本地双人档）等特性。
 
-## 环境要求
+## 文件结构
 
-- Python 3.10+
-- JDK 11+（建议 17）与 Maven 3.6+
-- Apache Flex SDK 4.16.1，`frameworks/libs/player/32.0/` 下放置 `playerglobal.swc`（32.0 版本）
-- Adobe Flash Player 32 Standalone（建议使用调试版）
-
-## 构建
-
-1. 下载 [FFDec_lib](https://github.com/jindrapetrik/jpexs-decompiler/tree/master/libsrc/ffdec_lib)（20.1.0），将 `ffdec_lib.jar` 及其依赖放入 `swfutil/libs/`，然后构建：
-
-    ```shell
-    cd swfutil
-    mvn install:install-file -Dfile=libs/ffdec_lib.jar -DgroupId=com.jpexs.decompiler -DartifactId=ffdec_lib -Dversion=20.1.0 -Dpackaging=jar
-    mvn package
-    ```
-
-2. 安装 Python 依赖：
-
-    ```shell
-    pip install -r requirements.txt
-    playwright install chromium
-    ```
-
-3. 参照 `.env.example` 创建 `.env`：
-
-    ```ini
-    BACKEND_PORT=8888
-    FLEX_PATH=C:\\flex\\
-    FLASH_PLAYER_PATH=C:\\flashplayer\\flashplayer_32_sa_debug.exe
-    ```
-
-4. 将当前目录加入 Flash Player 信任列表：
-
-    ```shell
-    echo %CD% > %APPDATA%\Macromedia\Flash Player\#Security\FlashPlayerTrust\trust.cfg
-    ```
-
-## 使用
-
-初始化并运行《造梦西游3》：
-
-```shell
-py -3 main.py init "https://www.4399.com/flash/zmhj.htm?g=3"
-py -3 main.py run
+```text
+zmxylx/
+├── run.py                 # 运行入口（打包为 zmhj3.exe）
+├── backends/              # 本地代理（缓存 SWF、伪造 4399 平台接口）
+├── speculum/swfutil.py    # swfutil 调用封装
+├── out/                   # 已初始化的游戏文件
+│   ├── cache/             # 游戏资源缓存
+│   ├── game.exe           # Flash Player
+│   ├── game.json / Game.swf / Main.swf / game_save.json
+├── dist/                  # 构建产物与发布包
+└── build_run.ps1          # 一键构建单文件 exe
 ```
 
-- 电卷/累计充值默认 50000（VIP5）。如需调整，修改 `core/speculum/loader/SpeculumLoader.as` 中的 `_balance` 后重新编译 `Main.swf`
-- 双人模式：游戏中点击「邀请好友」→「切换账号」→ 选择本地存档作为 2P 角色
-- 存档保存在 `out/game_save.json`，可直接拷贝携带
+## 构建单文件 exe
 
-## 已知限制
+```powershell
+.\build_run.ps1
+```
 
-- 联盟（工会）功能未启用：接口返回空数据，不会报错但不可用
-- 排行榜、活动接口返回空数据，界面可打开但不显示内容
-- 未处理的其他 4399 接口由本地代理统一吞掉，避免游戏弹出网络错误
+产物：`dist\zmhj3.exe`（单文件，无需安装 Python）。
+
+## 运行
+
+直接双击 `zmhj3.exe`，或 `python run.py`。需要：
+
+- `out\game.exe`：Flash Player（或通过 `.env` 的 `FLASH_PLAYER_PATH` 指定路径）
+- `out\` 下完整的游戏文件
+- 将当前目录加入 Flash Player 信任列表：
+
+  ```shell
+  echo %CD% > %APPDATA%\Macromedia\Flash Player\#Security\FlashPlayerTrust\trust.cfg
+  ```
+
+## 配置
+
+参照 `.env.example` 创建 `.env`（端口默认 8888，Flash Player 默认 `out\game.exe`）。
 
 ## 协议
 
-除 `external` 文件夹下的文件外，其余文件均采用 [AGPL-3.0 协议](LICENSE) 进行许可。
-
-## 其他
-
-技术细节参考[这篇博客](https://blog.itsmygo.tech/posts/play-an-4399-flash-game-offline/)。
-
-<p align=center><img src="ARCHITECTURE.png" style="width: 80%;"/></p>
+基于 [constfold/Speculum-4399](https://github.com/constfold/Speculum-4399)
+（AGPL-3.0）开发，本项目同样采用 [AGPL-3.0](LICENSE) 许可。
