@@ -1,64 +1,73 @@
-<h1 align=center>SPECULUM-4399</h1>
+<h1 align=center>SPECULUM-4399 · 造梦西游3 离线版</h1>
 
 > [!NOTE]
-> 项目仅满足个人学习交流，不保证任何有效性。
+> 本项目仅满足个人学习交流，不保证任何有效性。
 
-## 特性
+## 简介
 
-- 无需浏览器（只需本地 Flash Player Standalone）
-- 无需账号（也可以玩造梦西游等需要账号的游戏）
-- 自动嗅探下载游戏
-- 更易携带的存档
+让 4399《造梦西游3》在本地 Flash Player 中离线运行的加载器：
 
-### 已测试游戏
+- 无需浏览器、无需登录 4399 账号
+- 自动下载游戏资源并本地缓存，可完全离线游玩
+- 已适配：存档系统、电卷/VIP、商店消费、邀请好友（本地双人档）
+- 本地代理伪造 4399 平台接口（存档、时间同步、统计等），游戏内不出现网络报错
 
-- [造梦西游3](https://www.4399.com/flash/zmhj.htm?g=3)
-- [造梦西游2](https://www.4399.com/flash/zmhj.htm?g=2)
-- [爆枪突击](https://www.4399.com/flash/130396.htm)
-- [勇者之剑·信仰篇](https://www.4399.com/flash/yzzrhj.htm?g=2)
+## 环境要求
 
-## 使用说明
-
-- 初始化游戏
-    ```shell
-    py -3 main.py init <url>
-    ```
-- 启动游戏
-    ```shell
-    py -3 main.py run
-    ```
-
-## 注意事项
-
-由于本地 Flash Player 的限制，你需要将当前目录添加信任。具体步骤如下：
-```shell
-set CWD=%CD%
-echo %CWD% > %APPDATA%\Macromedia\Flash Player\#Security\FlashPlayerTrust\trust.cfg
-```
+- Python 3.10+
+- JDK 11+（建议 17）与 Maven 3.6+
+- Apache Flex SDK 4.16.1，`frameworks/libs/player/32.0/` 下放置 `playerglobal.swc`（32.0 版本）
+- Adobe Flash Player 32 Standalone（建议使用调试版）
 
 ## 构建
 
-0. 首先确保已正确安装 Python3, Java, Apache Flex, Adobe Flash Player Standalone。
-    - **需要 playerglobal.swc 为 32.0 版本**
+1. 下载 [FFDec_lib](https://github.com/jindrapetrik/jpexs-decompiler/tree/master/libsrc/ffdec_lib)（20.1.0），将 `ffdec_lib.jar` 及其依赖放入 `swfutil/libs/`，然后构建：
 
-1. 下载 [FFDec_lib](https://github.com/jindrapetrik/jpexs-decompiler/tree/master/libsrc/ffdec_lib)，并将 jar 文件放入 `swfutil/libs` 文件夹。
-2. 构建 `swfutil.jar`
     ```shell
     cd swfutil
+    mvn install:install-file -Dfile=libs/ffdec_lib.jar -DgroupId=com.jpexs.decompiler -DartifactId=ffdec_lib -Dversion=20.1.0 -Dpackaging=jar
     mvn package
     ```
 
-3. 安装 Python 依赖
+2. 安装 Python 依赖：
+
     ```shell
     pip install -r requirements.txt
-    ```
-
-4. 安装 Playwright Chromium
-    ```shell
     playwright install chromium
     ```
 
-5. 参照 `.env.example` 创建 `.env` 文件，填写相关信息。
+3. 参照 `.env.example` 创建 `.env`：
+
+    ```ini
+    BACKEND_PORT=8888
+    FLEX_PATH=C:\\flex\\
+    FLASH_PLAYER_PATH=C:\\flashplayer\\flashplayer_32_sa_debug.exe
+    ```
+
+4. 将当前目录加入 Flash Player 信任列表：
+
+    ```shell
+    echo %CD% > %APPDATA%\Macromedia\Flash Player\#Security\FlashPlayerTrust\trust.cfg
+    ```
+
+## 使用
+
+初始化并运行《造梦西游3》：
+
+```shell
+py -3 main.py init "https://www.4399.com/flash/zmhj.htm?g=3"
+py -3 main.py run
+```
+
+- 电卷/累计充值默认 50000（VIP5）。如需调整，修改 `core/speculum/loader/SpeculumLoader.as` 中的 `_balance` 后重新编译 `Main.swf`
+- 双人模式：游戏中点击「邀请好友」→「切换账号」→ 选择本地存档作为 2P 角色
+- 存档保存在 `out/game_save.json`，可直接拷贝携带
+
+## 已知限制
+
+- 联盟（工会）功能未启用：接口返回空数据，不会报错但不可用
+- 排行榜、活动接口返回空数据，界面可打开但不显示内容
+- 未处理的其他 4399 接口由本地代理统一吞掉，避免游戏弹出网络错误
 
 ## 协议
 
@@ -66,6 +75,6 @@ echo %CWD% > %APPDATA%\Macromedia\Flash Player\#Security\FlashPlayerTrust\trust.
 
 ## 其他
 
-细节参考[这篇博客](https://blog.itsmygo.tech/posts/play-an-4399-flash-game-offline/)。
+技术细节参考[这篇博客](https://blog.itsmygo.tech/posts/play-an-4399-flash-game-offline/)。
 
-<p align=center></div><img src="ARCHITECTURE.png" style="width: 80%;"/></p>
+<p align=center><img src="ARCHITECTURE.png" style="width: 80%;"/></p>
