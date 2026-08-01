@@ -27,9 +27,9 @@ def run():
         logging.error("Game not initialized: out/game.json not found")
         return
 
-    flash_player = Path(os.environ["FLASH_PLAYER_PATH"])
+    flash_player = Path(os.environ.get("FLASH_PLAYER_PATH", "out/game.exe"))
     if not flash_player.exists():
-        logging.error("Flash player not found")
+        logging.error(f"Flash player not found: {flash_player}")
         return
     logging.info(f"{flash_player=}")
 
@@ -38,7 +38,7 @@ def run():
     logging.info(f"Proxy to {baseurl}")
 
     with SpeculumServer(
-        ("localhost", int(os.environ["BACKEND_PORT"])),
+        ("localhost", int(os.environ.get("BACKEND_PORT", "8888"))),
         SpeculumHandler,
         base_url=baseurl,
         no_cache=False,
