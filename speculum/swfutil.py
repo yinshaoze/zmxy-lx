@@ -8,10 +8,6 @@ import json
 
 class SWFUtil:
     def __init__(self, flex_sdk):
-        self.java = shutil.which("java")
-        if not self.java:
-            raise "Java not found in PATH"
-
         self.cwd = Path(os.getcwd())
         flex_sdk = Path(flex_sdk)
         self.mxmlc = flex_sdk / "bin" / "mxmlc.bat"
@@ -19,16 +15,34 @@ class SWFUtil:
         self.swfutil = (
             self.cwd / "out" / "swfutil" / "swfutil-1.0-jar-with-dependencies.jar"
         )
+        self.swfutil_exe = Path(
+            os.environ.get(
+                "SWFUTIL_EXE", str(self.cwd / "dist" / "swfutil" / "swfutil.exe")
+            )
+        )
 
         assert self.mxmlc.exists(), "mxmlc not found"
-        assert self.swfutil.exists(), "swfutil jar not found"
         assert (
             self.playerglobal_home / "32.0" / "playerglobal.swc"
         ).exists(), "playerglobal.swc not found"
 
+        if self.swfutil_exe.exists():
+            self.java = None
+        else:
+            self.java = shutil.which("java")
+            if not self.java:
+                raise "Java not found in PATH (or set SWFUTIL_EXE to the packaged executable)"
+            assert self.swfutil.exists(), "swfutil jar not found"
+
     def _mxmlc_env(self):
         """mxmlc needs PLAYERGLOBAL_HOME to locate playerglobal.swc"""
         return {**os.environ, "PLAYERGLOBAL_HOME": str(self.playerglobal_home)}
+
+    def _cmd(self, *args):
+        """Run swfutil via the packaged executable when available, else java -jar."""
+        if self.swfutil_exe.exists():
+            return [str(self.swfutil_exe), *args]
+        return [self.java, "-jar", str(self.swfutil), *args]
 
     def build_loader(self, width: int, height: int, frame_rate: int, output: Path):
         compiler_options = [self.mxmlc]
@@ -69,7 +83,7 @@ class SWFUtil:
 
     def get_info(self, swf: Path):
         info = sp.run(
-            [self.java, "-jar", self.swfutil, "info", swf],
+            self._cmd("info", swf),
             check=True,
             stdout=sp.PIPE,
         ).stdout
@@ -83,36 +97,18 @@ class SWFUtil:
 
     def merge(self, original: Path, new: Path, output: Path):
         sp.run(
-            [
-                self.java,
-                "-jar",
-                self.swfutil,
-                "merge",
-                original,
-                new,
-                output,
-            ],
+            self._cmd("merge", original, new, output),
             check=True,
         )
 
     def inject(self, swf: Path, output: Path):
         sp.run(
-            [
-                self.java,
-                "-jar",
-                self.swfutil,
-                "inject",
-                swf,
-                "speculum.interceptor",
-                output,
-            ],
+            self._cmd("inject", swf, "speculum.interceptor", output),
             check=True,
         )
 
     def extract(self, swf: Path, output: Path) -> bool:
-        returncode = sp.run(
-            [self.java, "-jar", self.swfutil, "extract", swf, output]
-        ).returncode
+        returncode = sp.run(self._cmd("extract", swf, output)).returncode
         return returncode == 0
 
 

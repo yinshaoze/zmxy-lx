@@ -6,3 +6,4 @@
 !.gitkeep
 .env
 __pycache__
+/dist/
