@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="Test1" time="0.345" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="C:\Users\yinsz\Documents\Codex\2026-08-01\plugin-creator-c-users-yinsz-codex-2\zmxylx\out\swfutil\test-classes;C:\Users\yinsz\Documents\Codex\2026-08-01\plugin-creator-c-users-yinsz-codex-2\zmxylx\out\swfutil\classes;C:\Users\yinsz\.m2\repository\com\jpexs\decompiler\ffdec_lib\20.1.0\ffdec_lib-20.1.0.jar;C:\Users\yinsz\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.9.23\kotlin-stdlib-1.9.23.jar;C:\Users\yinsz\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\yinsz\.m2\repository\org\jetbrains\kotlin\kotlin-test\1.9.23\kotlin-test-1.9.23.jar;C:\Users\yinsz\.m2\repository\org\testng\testng\7.9.0\testng-7.9.0.jar;C:\Users\yinsz\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\yinsz\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;C:\Users\yinsz\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\yinsz\.m2\repository\org\slf4j\slf4j-simple\2.0.13\slf4j-simple-2.0.13.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
+    <property name="sun.java.command" value="C:\Users\yinsz\AppData\Local\Temp\surefire11170655966212782237\surefirebooter-20260801202622381_3.jar C:\Users\yinsz\AppData\Local\Temp\surefire11170655966212782237 2026-08-01T20-26-22_271-jvmRun1 surefire-20260801202622381_1tmp surefire_0-20260801202622381_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\yinsz\Documents\Codex\2026-08-01\plugin-creator-c-users-yinsz-codex-2\zmxylx\out\swfutil\test-classes;C:\Users\yinsz\Documents\Codex\2026-08-01\plugin-creator-c-users-yinsz-codex-2\zmxylx\out\swfutil\classes;C:\Users\yinsz\.m2\repository\com\jpexs\decompiler\ffdec_lib\20.1.0\ffdec_lib-20.1.0.jar;C:\Users\yinsz\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.9.23\kotlin-stdlib-1.9.23.jar;C:\Users\yinsz\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\yinsz\.m2\repository\org\jetbrains\kotlin\kotlin-test\1.9.23\kotlin-test-1.9.23.jar;C:\Users\yinsz\.m2\repository\org\testng\testng\7.9.0\testng-7.9.0.jar;C:\Users\yinsz\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\yinsz\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;C:\Users\yinsz\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\yinsz\.m2\repository\org\slf4j\slf4j-simple\2.0.13\slf4j-simple-2.0.13.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\yinsz"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-07-16"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-17"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\yinsz\Documents\Codex\2026-08-01\plugin-creator-c-users-yinsz-codex-2\zmxylx\swfutil"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\yinsz\AppData\Local\Temp\surefire11170655966212782237\surefirebooter-20260801202622381_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.12+8-LTS-286"/>
+    <property name="user.name" value="yinsz"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\yinsz\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\yinsz\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.12"/>
+    <property name="user.dir" value="C:\Users\yinsz\Documents\Codex\2026-08-01\plugin-creator-c-users-yinsz-codex-2\zmxylx\swfutil"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-17\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\yinsz\.codex\tmp\arg0\codex-arg0rpAiN7;C:\Users\yinsz\.cache\codex-runtimes\codex-primary-runtime\dependencies\bin\override;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\yinsz\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\yinsz\AppData\Local\Programs\Python\Python314\;C:\Users\yinsz\AppData\Local\Programs\Python\Launcher\;C:\Users\yinsz\AppData\Local\Microsoft\WindowsApps;C:\Users\yinsz\AppData\Local\Programs\Hyper\resources\bin;C:\Program Files\apache-maven-3.9.16\bin;C:\Users\yinsz\AppData\Local\Programs\Python\Python314\;C:\Users\yinsz\AppData\Local\Programs\Python\Python314\Scripts;C:\Program Files\apache-maven-3.9.16\bin;C:\Users\yinsz\.cache\codex-runtimes\codex-primary-runtime\dependencies\bin\fallback;C:\Users\yinsz\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd;C:\Users\yinsz\AppData\Local\OpenAI\Codex\bin\3e42d49ad3e35a50;C:\Program Files\WindowsApps\OpenAI.Codex_26.727.6591.0_x64__2p2nqsd0c76g0\app\resources;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="17.0.12+8-LTS-286"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="test1" classname="Test1" time="0.003"/>
+</testsuite>

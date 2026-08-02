@@ -1,7 +1,6 @@
 /.venv
 /.vscode
 /swfutil/.idea
-/out/*
 /swfutil/libs/*
 !.gitkeep
 .env
